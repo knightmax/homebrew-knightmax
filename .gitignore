@@ -1,0 +1,17 @@
+# Homebrew
+Casks
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Other
+.env

@@ -1,0 +1,25 @@
+name: Test Formulas
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Audit formulas
+        run: |
+          brew audit --new-formula Formula/*.rb
+      
+      - name: Install purectx
+        run: |
+          brew install --build-from-source ./Formula/purectx.rb
+      
+      - name: Test purectx binary
+        run: |
+          brew test purectx
