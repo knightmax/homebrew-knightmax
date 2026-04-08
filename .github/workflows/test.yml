@@ -16,10 +16,15 @@ jobs:
         run: |
           brew audit --new-formula Formula/*.rb
       
-      - name: Install purectx
+      - name: Test purectx formula
         run: |
+          # Install the formula from the local directory
           brew install --build-from-source ./Formula/purectx.rb
       
-      - name: Test purectx binary
+      - name: Verify installation
         run: |
-          brew test purectx
+          # Check that the binary exists
+          which pure
+          
+          # Test the binary with --version
+          pure --version

@@ -12,6 +12,6 @@ class Purectx < Formula
   end
 
   test do
-    system bin/"pure", "--version"
+    assert_match "pure", shell_output("#{bin}/pure --version")
   end
 end
