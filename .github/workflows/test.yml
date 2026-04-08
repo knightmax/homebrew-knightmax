@@ -10,21 +10,23 @@ jobs:
   test:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+      
+      - name: Register as a Homebrew tap
+        run: |
+          mkdir -p "$(brew --repository)/Library/Taps/knightmax"
+          ln -s "$GITHUB_WORKSPACE" "$(brew --repository)/Library/Taps/knightmax/homebrew-knightmax"
       
       - name: Lint formulas
         run: |
-          brew audit --formula Formula/*.rb || true
+          brew audit --formula purectx || true
       
-      - name: Test purectx formula
+      - name: Install purectx
         run: |
-          # Install the formula from the local directory
-          brew install --build-from-source ./Formula/purectx.rb
+          brew install --build-from-source purectx
       
       - name: Verify installation
         run: |
-          # Check that the binary exists
           which pure
-          
-          # Test the binary with --version
+          which pure
           pure --version
